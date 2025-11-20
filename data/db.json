@@ -1,0 +1,88 @@
+{
+  "canvases": [
+    {
+      "id": 1,
+      "title": "친환경 도시 농업 플랫폼",
+      "lastModified": "2023-06-15",
+      "category": "농업"
+    },
+    {
+      "id": 2,
+      "title": "AI 기반 건강 관리 앱",
+      "lastModified": "2023-06-10",
+      "category": "헬스케어"
+    },
+    {
+      "id": 3,
+      "title": "온디맨드 물류 서비스",
+      "lastModified": "2023-06-05",
+      "category": "물류"
+    },
+    {
+      "id": 4,
+      "title": "VR 가상 여행 서비스",
+      "lastModified": "2023-06-01",
+      "category": "여행"
+    }
+  ],
+  "COND1": [
+    { "code": "A", "name": "A 옵션" },
+    { "code": "B", "name": "B 옵션" },
+    { "code": "C", "name": "C 옵션" }
+  ],
+
+  "COND2": [
+    { "code": "10", "name": "10" },
+    { "code": "20", "name": "20" },
+    { "code": "30", "name": "30" }
+  ],
+
+  "COND3": [
+    { "code": "Y", "name": "예" },
+    { "code": "N", "name": "아니오" }
+  ],
+
+  "COND4": [
+    { "code": "KR", "name": "한국" },
+    { "code": "US", "name": "미국" },
+    { "code": "JP", "name": "일본" }
+  ],
+
+  "COND5": [
+    { "code": "T1", "name": "타입1" },
+    { "code": "T2", "name": "타입2" }
+  ],
+
+  "search": [
+    {
+      "id": 1,
+      "name": "홍길동",
+      "value": "테스트1",
+      "cond1": "A",
+      "cond2": "10",
+      "cond3": "Y",
+      "cond4": "KR",
+      "cond5": "T1"
+    },
+    {
+      "id": 2,
+      "name": "이몽룡",
+      "value": "테스트2",
+      "cond1": "B",
+      "cond2": "20",
+      "cond3": "N",
+      "cond4": "US",
+      "cond5": "T2"
+    },
+    {
+      "id": 3,
+      "name": "성춘향",
+      "value": "테스트3",
+      "cond1": "C",
+      "cond2": "30",
+      "cond3": "Y",
+      "cond4": "JP",
+      "cond5": "T1"
+    }
+  ]
+}
