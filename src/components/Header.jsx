@@ -12,6 +12,18 @@ function Header() {
       icon: <FaInfoCircle />,
       to: '/searchpage',
     },
+    {
+      id: 'contextmenu',
+      label: 'Context Menu',
+      icon: <FaInfoCircle />,
+      to: '/contextmenu',
+    },
+    {
+      id: 'allreadonlydisabled',
+      label: 'All Read Only Disabled',
+      icon: <FaInfoCircle />,
+      to: '/allreadonlydisabled',
+    },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
