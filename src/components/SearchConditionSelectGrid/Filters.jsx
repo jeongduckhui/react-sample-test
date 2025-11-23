@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { fetchCommonCode } from './api';
+import { fetchCommonCode } from '../api/api';
 
-// 조회조건 + 버튼 + UI 잠금
+// components/Filters.jsx
+// Suspense-friendly
 export default function Filters({
   filters,
   setFilter,
@@ -11,7 +12,6 @@ export default function Filters({
   onSearch,
   loading,
 }) {
-  // 각 select에 대해 개별 useQuery
   const select1Query = useQuery(
     ['commonCode', 'CODE1', 'Y', 'P1'],
     () => fetchCommonCode({ code: 'CODE1', usedYn: 'Y', extraParam: 'P1' }),
@@ -42,108 +42,142 @@ export default function Filters({
     { staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 30 },
   );
 
-  const selectQueries = [
-    select1Query,
-    select2Query,
-    select3Query,
-    select4Query,
-    select5Query,
-  ];
-
-  const selectInfo = [
-    { key: 'select1' },
-    { key: 'select2' },
-    { key: 'select3' },
-    { key: 'select4' },
-    { key: 'select5' },
-  ];
-
   return (
     <div
-      style={{
-        display: 'flex',
-        gap: 10,
-        marginBottom: 10,
-        flexWrap: 'wrap',
-        alignItems: 'center',
-      }}
+      style={{ display: 'flex', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}
     >
-      {selectInfo.map((info, idx) => (
-        <select
-          key={info.key}
-          value={filters[info.key]}
-          onChange={e => setFilter(info.key, e.target.value)}
-          disabled={loading}
-        >
-          <option value="">선택</option>
-          {selectQueries[idx].data?.map(opt => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      ))}
+      {/* Selects */}
+      <select
+        value={filters.select1}
+        onChange={e => setFilter('select1', e.target.value)}
+        disabled={loading}
+      >
+        <option value="">선택</option>
+        {select1Query.data?.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
 
+      <select
+        value={filters.select2}
+        onChange={e => setFilter('select2', e.target.value)}
+        disabled={loading}
+      >
+        <option value="">선택</option>
+        {select2Query.data?.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={filters.select3}
+        onChange={e => setFilter('select3', e.target.value)}
+        disabled={loading}
+      >
+        <option value="">선택</option>
+        {select3Query.data?.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+
+      {/* multi */}
+      <select
+        multiple
+        value={filters.select4}
+        onChange={e =>
+          setFilter(
+            'select4',
+            Array.from(e.target.selectedOptions, o => o.value),
+          )
+        }
+        disabled={loading}
+        style={{ minWidth: 120, height: 80 }}
+      >
+        {select4Query.data?.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+
+      <select
+        multiple
+        value={filters.select5}
+        onChange={e =>
+          setFilter(
+            'select5',
+            Array.from(e.target.selectedOptions, o => o.value),
+          )
+        }
+        disabled={loading}
+        style={{ minWidth: 120, height: 80 }}
+      >
+        {select5Query.data?.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+
+      {/* 날짜 */}
       <DatePicker
         selected={filters.dateFrom}
-        onChange={date => setFilter('dateFrom', date)}
+        onChange={d => setFilter('dateFrom', d)}
         placeholderText="From"
         disabled={loading}
       />
       <DatePicker
         selected={filters.dateTo}
-        onChange={date => setFilter('dateTo', date)}
+        onChange={d => setFilter('dateTo', d)}
         placeholderText="To"
         disabled={loading}
       />
 
+      {/* 체크 */}
       <label>
         <input
           type="checkbox"
           checked={filters.check}
           onChange={e => setFilter('check', e.target.checked)}
           disabled={loading}
-        />
+        />{' '}
         체크
       </label>
 
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="radio"
-            value="A"
-            checked={filters.radio === 'A'}
-            onChange={e => setFilter('radio', e.target.value)}
-            disabled={loading}
-          />
-          A
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="radio"
-            value="B"
-            checked={filters.radio === 'B'}
-            onChange={e => setFilter('radio', e.target.value)}
-            disabled={loading}
-          />
-          B
-        </label>
-      </div>
+      {/* 라디오 */}
+      <label>
+        <input
+          type="radio"
+          name="radio"
+          value="A"
+          checked={filters.radio === 'A'}
+          onChange={e => setFilter('radio', e.target.value)}
+          disabled={loading}
+        />{' '}
+        A
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="radio"
+          value="B"
+          checked={filters.radio === 'B'}
+          onChange={e => setFilter('radio', e.target.value)}
+          disabled={loading}
+        />{' '}
+        B
+      </label>
 
-      <button
-        onClick={onSearch}
-        disabled={loading}
-        style={{ padding: '4px 10px' }}
-      >
+      <button onClick={onSearch} disabled={loading}>
         조회
       </button>
-      <button
-        onClick={resetFilters}
-        disabled={loading}
-        style={{ padding: '4px 10px' }}
-      >
+      <button onClick={resetFilters} disabled={loading}>
         초기화
       </button>
     </div>

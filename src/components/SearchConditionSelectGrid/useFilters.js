@@ -1,14 +1,14 @@
 import { useImmer } from 'use-immer';
 import { useCallback } from 'react';
 
-// 조회조건 상태 관리
+// hooks/useFilters.js
 export default function useFilters() {
   const [filters, updateFilters] = useImmer({
     select1: '',
     select2: '',
     select3: '',
-    select4: '',
-    select5: '',
+    select4: [], // multi
+    select5: [], // multi
     dateFrom: null,
     dateTo: null,
     check: false,
@@ -29,8 +29,8 @@ export default function useFilters() {
       draft.select1 = '';
       draft.select2 = '';
       draft.select3 = '';
-      draft.select4 = '';
-      draft.select5 = '';
+      draft.select4 = [];
+      draft.select5 = [];
       draft.dateFrom = null;
       draft.dateTo = null;
       draft.check = false;

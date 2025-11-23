@@ -61,6 +61,45 @@ react-datepicker가 올바르게 표시되려면 전용 CSS 파일을 프로젝�
 import 'react-datepicker/dist/react-datepicker.css';
 
 ## 비교적 간단한 화면으로 전체 소스 다 적용해서 화면 한 페이지 만들어보기
+## 멀티셀렉트 조회조건 만들어야 함.
+
+## GridView.jsx 동작 설정
+✅ 1. 자동조회(autoFetch=true) 시 정상 동작 여부
+✔ 동작 흐름
+부모에서 filters가 변경됨
+
+useEffect에서 debouncedSet(filters) 실행
+
+500ms 후 debouncedFilters 변경
+
+queryKey = ['gridData', JSON.stringify(debouncedFilters)]가 변경됨
+
+enabled: autoFetch === true 이므로 useQuery가 자동 실행됨
+
+✅ 2. 자동조회 ON/OFF 토글 시 동작
+autoFetch={false}인 경우:
+
+enabled: autoFetch
+때문에 자동조회가 완전히 멈춥니다.
+
+하지만 "manualTrigger"를 이용한 수동조회는 완전히 별도로 작동합니다.
+
+✅ 3. manualTrigger 수동조회 정상 동작 확인
+이 코드:
+
+useEffect(() => {
+  if (manualTrigger) {
+    refetch();
+  }
+}, [manualTrigger, refetch]);
+✔ 수동 조회 동작 방식
+부모 컴포넌트에서 버튼 클릭 등으로
+setManualTrigger(prev => !prev)
+이렇게 토글해주면 됨.
+
+manualTrigger 값이 바뀜 → useEffect 작동 → refetch() 실행
+
+autoFetch=false여도 refetch는 무조건 실행됨
 
 
   "dependencies": {
@@ -94,3 +133,123 @@ import 'react-datepicker/dist/react-datepicker.css';
     "tailwindcss": "^3.4.18",
     "vite": "^7.2.2"
   }
+
+
+  =====================================================================================
+
+  src/
+ ├─ api/
+ │   └─ api.js
+ ├─ hooks/
+ │   ├─ useFilters.js
+ │   ├─ usePrevious.js
+ │   ├─ useRowHighlight.js
+ │   ├─ useGridState.js
+ ├─ components/
+ │   ├─ Filters.jsx
+ │   ├─ GridView.jsx
+ │   ├─ AutoFetchToggle.jsx
+ │   ├─ SearchButton.jsx
+ │   ├─ QueryBoundary.jsx
+ ├─ App.jsx
+ └─ main.jsx
+
+✔ Suspense 적용
+✔ 자동조회/수동조회
+✔ debounce filters별 독립처리
+✔ 이전 필터 비교 후 변경된 경우만 조회
+✔ Grid 상태 localStorage 저장
+✔ 변경된 행 강조
+✔ 토스트
+✔ keepPreviousData
+✔ 모든 Select + Date + Checkbox + Radio 포함
+✔ 실무형 구조로 파일 분리
+
+
+============================================================
+Large Dataset 최적화 버전이라는 건
+AG-Grid에 아주 많은 데이터(수만 ~ 수백만 건)를 표시할 때 성능이 급격히 느려지지 않도록 최적화된 방식을 말해.
+
+아주 쉽게 설명해볼게.
+
+✅ Large Dataset 최적화 버전이란?
+AG-Grid는 기본적으로 “전부 다 가져와서 보여주는 방식”으로도 동작함.
+
+하지만 데이터가 너무 많아지면:
+
+화면 렌더링이 느려지고
+
+브라우저 메모리가 터지고
+
+스크롤이 턱턱 끊기고
+
+서버 응답도 무거워지고
+
+필터/정렬 처리도 매우 느려짐
+
+그래서 대량 데이터를 위한 특별한 모드들이 존재함.
+이렇게 "대량 데이터에 특화된 모드"를 통칭해서 우리가 흔히
+
+👉 AG-Grid Large Dataset Optimized Version
+
+이라고 부르는 거야.
+
+🔥 어떤 기능들이 Large Dataset 최적화 모드야?
+아래 3개가 대량 데이터 처리의 핵심 기능이야.
+
+1) 🔹 Server-Side Row Model (SSR / Enterprise Only)
+대량 데이터(10만 ~ 1000만 건)를 위한 최상위 모드
+
+스크롤 위치에 따라 서버에서 필요한 데이터만 가져옴
+
+정렬/필터링도 서버에서 처리
+
+메모리에 로우 전체를 보관하지 않음
+
+가상화된 방식으로 동작 → 부하 매우 적음
+
+큰 기업 시스템에서 거의 무조건 사용됨
+
+2) 🔹 Infinite Row Model (무료 버전 가능)
+일반 유저가 가장 많이 사용하는 방식
+
+화면에서 필요할 때마다 서버에서 ‘다음 페이지’를 요청
+
+AG-Grid가 내부적으로 페이징 없이 무한 스크롤처럼 동작
+
+데이터 누적 가능
+
+SSR보다 단순하지만 대량 데이터에서도 잘 버팀
+
+3) 🔹 Client-Side Row Model + Row Virtualization
+기본 모드지만 아래 최적화 적용 시 꽤 성능 좋음
+
+rowBuffer 줄이기
+
+DOM 가상화
+
+1000~3000건 수준은 전혀 문제 없음
+
+필터/정렬은 클라이언트에서 수행
+
+하지만 2~3만 건 넘으면 버벅거림이 생김.
+
+✔ 그러면 "Large Dataset 최적화 버전"이란?
+👉 "대량 데이터를 효과적으로 다루기 위해
+AG-Grid가 제공하는 최적화된 데이터 로딩/렌더링 방식"
+
+즉, 아래 기능들 중 하나 이상을 사용하는 것:
+
+항목	설명
+Infinite Scroll Mode	필요한 만큼만 가져오고, 페이지를 쌓는 방식
+Server-Side Row Model	대량 데이터용 완전한 서버 기반 모델
+Row Virtualization	화면에 표시되는 DOM만 렌더링
+Lazy Load / Chunk Load	데이터 덩어리 단위로 로드
+Pagination + keep-alive	기존 데이터 캐싱 후 빠른 전환
+Debounced Filtering	필터 입력 시 서버 부담 완화
+✔ AG-Grid 화면에서 Large Dataset 최적화 모드를 쓸 필요가 있을까?
+👉 데이터가 5,000건 이하 → 필요 없음
+기본 Client-Side Row Model로 충분
+
+👉 5,000 ~ 20,000건 → Infinite Scroll 추천
+👉 50,000건 이상 → Server-Side Row Model (Enterprise)
