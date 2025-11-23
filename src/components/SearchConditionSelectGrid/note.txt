@@ -1,0 +1,54 @@
+🔹 특징
+자동 + 수동 조회 하이브리드 UX
+
+조건 변경 → debounce 자동 조회
+
+조회 버튼 → 서버에서 최신 데이터 강제 조회
+
+조회 상태 표시
+
+전체 Loading Overlay
+
+결과 없음 메시지
+
+백그라운드 조회 중 작은 배너
+
+React Query 캐싱 적용 + UX 개선
+
+캐시 데이터 즉시 표시
+
+백그라운드 최신화
+
+keepPreviousData로 Grid 깜빡임 방지
+
+useImmer로 조회조건 상태 관리
+
+각 select는 코드값, 사용유무, 추가 파라미터 전달 가능
+
+Grid row 변경 애니메이션
+
+조회 조건 초기화 버튼
+
+조회 중 조건 변경 막기
+
+조회 성공/실패 토스트 알림
+
+🔹 실무용 UX 개선 포인트
+조회조건 변경 → 자동 debounce 조회
+
+조회 버튼 → 수동 강제 조회
+
+조회 중 UI 잠금 → select, datepicker, 체크박스, 버튼 disable
+
+조회 상태 표시 → Loading, Empty, Background fetching 표시
+
+Grid row 변경 애니메이션 (animateRows={true})
+
+토스트 알림 → 조회 성공/실패 알림
+
+React Query 캐싱 적용 → 빠른 화면 표시 + 백그라운드 최신화
+
+
+npm install @tanstack/react-query
+
+npm install lodash
