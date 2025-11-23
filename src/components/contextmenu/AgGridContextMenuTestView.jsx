@@ -60,7 +60,7 @@ function AgGridContextMenuTestView() {
           onClose={closeMenu}
           menuData={menuData}
           actions={actions}
-          maxPerRow={6} // 한 줄에 최대 5개 표시
+          maxPerRow={5} // 한 줄에 최대 5개 표시
         />
       )}
     </div>

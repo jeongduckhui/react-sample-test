@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useLayoutEffect, useCallback } from 'react';
 import NestedMenu from './NestedMenu';
 import { menuData as defaultMenuData } from './menuData';
 
@@ -11,9 +11,10 @@ export default function ContextMenu({
 }) {
   const [openMenus, setOpenMenus] = useState({});
   const wrapperRef = useRef(null);
-  const { x: initX, y: initY } = position;
 
-  // open/close 핸들러 메모이제이션
+  const { x: initX, y: initY } = position;
+  const [adjustedPos, setAdjustedPos] = useState({ x: initX, y: initY });
+
   const openMenu = useCallback(
     id => setOpenMenus(prev => ({ ...prev, [id]: true })),
     [],
@@ -23,10 +24,7 @@ export default function ContextMenu({
     [],
   );
 
-  const [adjustedPos, setAdjustedPos] = useState({ x: initX, y: initY });
-
-  // 위치 조정 로직
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!wrapperRef.current) return;
 
     const rect = wrapperRef.current.getBoundingClientRect();
@@ -39,11 +37,8 @@ export default function ContextMenu({
     if (rect.left + rect.width > vw) newX = vw - rect.width - 8;
     if (rect.top + rect.height > vh) newY = vh - rect.height - 8;
 
-    // Error: Calling setState synchronously within an effect can trigger ~~
-    // 위 에러는 로컬 StrictMode에서만 발생하고 프로덕션에서는 문제 없음.
-    // 에러를 없애고 싶으면 useEffect -> useLayoutEffect로 변경하면 됨.
     setAdjustedPos({ x: newX, y: newY });
-  }, [initX, initY, menuData]);
+  }, [initX, initY]);
 
   const sharedProps = {
     openMenus,
@@ -57,7 +52,7 @@ export default function ContextMenu({
     <>
       <div
         className="fixed inset-0"
-        style={{ zIndex: 9990, background: 'transparent' }}
+        style={{ zIndex: 9990 }}
         onClick={onClose}
       />
 
@@ -73,6 +68,7 @@ export default function ContextMenu({
           padding: 4,
           display: 'flex',
           flexWrap: 'wrap',
+          gap: 4,
         }}
       >
         {menuData.children.map(menu => (
