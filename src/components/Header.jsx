@@ -5,24 +5,30 @@ import { useState } from 'react';
 function Header() {
   const navItems = [
     { id: 'home', label: 'Home', icon: <FaHome />, to: '/' },
-    { id: 'about', label: 'About', icon: <FaInfoCircle />, to: '/about' },
+    // { id: 'about', label: 'About', icon: <FaInfoCircle />, to: '/about' },
     {
       id: 'searchpage',
-      label: 'SearchPage',
+      label: '공통코드 컴스텀 훅',
       icon: <FaInfoCircle />,
       to: '/searchpage',
     },
     {
       id: 'contextmenu',
-      label: 'Context Menu',
+      label: '그리드 우클릭 팝업',
       icon: <FaInfoCircle />,
       to: '/contextmenu',
     },
     {
       id: 'allreadonlydisabled',
-      label: 'All Read Only Disabled',
+      label: 'All ReadOnly Disabled',
       icon: <FaInfoCircle />,
       to: '/allreadonlydisabled',
+    },
+    {
+      id: 'popuptransfer',
+      label: '항목이동 팝업',
+      icon: <FaInfoCircle />,
+      to: '/popuptransfer',
     },
   ];
 

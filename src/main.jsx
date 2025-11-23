@@ -8,6 +8,7 @@ import About from './pages/About';
 import SearchPage from './components/common-code/SearchPage.jsx';
 import AgGridContextMenuTestView from './components/contextmenu/AgGridContextMenuTestView.jsx';
 import AllReadonlyDisabledToggle from './components/allreadonlydisabledtoggle/AllReadonlyDisabledToggle.jsx';
+import PopupTest from './components/popuptransfer/PopupTest.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'allreadonlydisabled',
         element: <AllReadonlyDisabledToggle />,
+      },
+      {
+        path: 'popuptransfer',
+        element: <PopupTest />,
       },
     ],
   },
