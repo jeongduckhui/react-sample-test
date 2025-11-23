@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import useFetchOptions from '../components/common-code/useFetchOptions';
-import SelectBox from '../components/common-code/SelectBox';
+import useFetchOptions from './useFetchOptions';
+import SelectBox from './SelectBox';
 
 export default function SearchPage() {
   // 조회조건 상태

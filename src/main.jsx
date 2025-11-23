@@ -5,9 +5,7 @@ import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Home from './pages/Home';
 import About from './pages/About';
-import SearchPage from './pages/SearchPage.jsx';
-// import AgGridContextMenu from './components/contextmenu/AgGridConextMenuSample.jsx';
-// import ContextMenuTest from './components/contextmenu/ContextMenuTest.jsx';
+import SearchPage from './components/common-code/SearchPage.jsx';
 import AgGridContextMenuTestView from './components/contextmenu/AgGridContextMenuTestView.jsx';
 import AllReadonlyDisabledToggle from './components/allreadonlydisabledtoggle/AllReadonlyDisabledToggle.jsx';
 
@@ -31,7 +29,6 @@ const router = createBrowserRouter([
       {
         path: 'contextmenu',
         element: <AgGridContextMenuTestView />,
-        // element: <ContextMenuTest />,
       },
       {
         path: 'allreadonlydisabled',
