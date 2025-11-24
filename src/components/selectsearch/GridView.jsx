@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 export function GridView({ searchTrigger, conditions }) {
   const fetchGridData = async () => {
@@ -15,16 +18,25 @@ export function GridView({ searchTrigger, conditions }) {
     enabled: searchTrigger > 0,
   });
 
+  const columnDefs = [
+    { headerName: 'ID', field: 'id', width: 100 },
+    { headerName: 'Value', field: 'value', flex: 1 },
+  ];
+
   return (
-    <div>
+    <div style={{ marginTop: 20 }}>
       <h3>조회결과</h3>
+
       {gridQuery.isLoading && <div>Loading...</div>}
 
-      {gridQuery.data?.map(row => (
-        <div key={row.id} style={{ border: '1px solid #aaa', margin: 5 }}>
-          #{row.id} / value={row.value}
-        </div>
-      ))}
+      <div className="ag-theme-alpine" style={{ height: 400 }}>
+        <AgGridReact
+          rowData={gridQuery.data || []}
+          columnDefs={columnDefs}
+          pagination={true}
+          paginationPageSize={20}
+        />
+      </div>
     </div>
   );
 }

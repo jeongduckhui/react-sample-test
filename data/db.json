@@ -141,27 +141,134 @@
   "gridData": [
     {
       "id": 1,
-      "parent": "P1",
-      "child": "C1",
-      "grandChild": "G1",
-      "useYn": "Y",
-      "value": 123
+      "parent": "A",
+      "child": "A-1",
+      "value": "Apple-01",
+      "amount": 120
     },
     {
       "id": 2,
-      "parent": "P1",
-      "child": "C2",
-      "grandChild": "G2",
-      "useYn": "N",
-      "value": 777
+      "parent": "A",
+      "child": "A-1",
+      "value": "Apple-02",
+      "amount": 300
     },
     {
       "id": 3,
-      "parent": "P2",
-      "child": "C3",
-      "grandChild": "G3",
-      "useYn": "Y",
-      "value": 555
+      "parent": "A",
+      "child": "A-1",
+      "value": "Apple-03",
+      "amount": 90
+    },
+
+    {
+      "id": 4,
+      "parent": "A",
+      "child": "A-2",
+      "value": "Avocado-01",
+      "amount": 210
+    },
+    {
+      "id": 5,
+      "parent": "A",
+      "child": "A-2",
+      "value": "Avocado-02",
+      "amount": 150
+    },
+    {
+      "id": 6,
+      "parent": "A",
+      "child": "A-2",
+      "value": "Avocado-03",
+      "amount": 500
+    },
+
+    {
+      "id": 7,
+      "parent": "B",
+      "child": "B-1",
+      "value": "Banana-01",
+      "amount": 70
+    },
+    {
+      "id": 8,
+      "parent": "B",
+      "child": "B-1",
+      "value": "Banana-02",
+      "amount": 80
+    },
+    {
+      "id": 9,
+      "parent": "B",
+      "child": "B-1",
+      "value": "Banana-03",
+      "amount": 95
+    },
+
+    {
+      "id": 10,
+      "parent": "B",
+      "child": "B-2",
+      "value": "Blueberry-01",
+      "amount": 330
+    },
+    {
+      "id": 11,
+      "parent": "B",
+      "child": "B-2",
+      "value": "Blueberry-02",
+      "amount": 380
+    },
+    {
+      "id": 12,
+      "parent": "B",
+      "child": "B-2",
+      "value": "Blueberry-03",
+      "amount": 410
+    },
+
+    {
+      "id": 13,
+      "parent": "C",
+      "child": "C-1",
+      "value": "Cherry-01",
+      "amount": 220
+    },
+    {
+      "id": 14,
+      "parent": "C",
+      "child": "C-1",
+      "value": "Cherry-02",
+      "amount": 240
+    },
+    {
+      "id": 15,
+      "parent": "C",
+      "child": "C-1",
+      "value": "Cherry-03",
+      "amount": 200
+    },
+
+    {
+      "id": 16,
+      "parent": "C",
+      "child": "C-2",
+      "value": "Coconut-01",
+      "amount": 500
+    },
+    {
+      "id": 17,
+      "parent": "C",
+      "child": "C-2",
+      "value": "Coconut-02",
+      "amount": 550
+    },
+    {
+      "id": 18,
+      "parent": "C",
+      "child": "C-2",
+      "value": "Coconut-03",
+      "amount": 620
     }
   ]
 }
