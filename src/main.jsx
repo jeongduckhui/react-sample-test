@@ -9,6 +9,8 @@ import SearchPage from './components/common-code/SearchPage.jsx';
 import AgGridContextMenuTestView from './components/contextmenu/AgGridContextMenuTestView.jsx';
 import AllReadonlyDisabledToggle from './components/allreadonlydisabledtoggle/AllReadonlyDisabledToggle.jsx';
 import PopupTest from './components/popuptransfer/PopupTest.jsx';
+import SelectSearchPage from './components/selectsearch/SelectSearchPage.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'searchpage',
-        element: <SearchPage />,
+        element: <SelectSearchPage />,
       },
       {
         path: 'contextmenu',
@@ -42,8 +44,11 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 );

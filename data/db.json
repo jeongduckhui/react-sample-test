@@ -84,5 +84,84 @@
       "cond4": "JP",
       "cond5": "T1"
     }
+  ],
+  "parents": [
+    { "id": "P1", "name": "부모1", "paramA": "A", "paramB": "B" },
+    { "id": "P2", "name": "부모2", "paramA": "A", "paramB": "B" }
+  ],
+
+  "children": [
+    {
+      "id": "C1",
+      "parentId": "P1",
+      "name": "자식1",
+      "paramX": "X1",
+      "paramY": "Y1"
+    },
+    {
+      "id": "C2",
+      "parentId": "P1",
+      "name": "자식2",
+      "paramX": "X2",
+      "paramY": "Y2"
+    },
+    {
+      "id": "C3",
+      "parentId": "P2",
+      "name": "자식3",
+      "paramX": "X3",
+      "paramY": "Y3"
+    }
+  ],
+
+  "grandChildren": [
+    {
+      "id": "G1",
+      "childId": "C1",
+      "name": "손자1",
+      "paramA": "A1",
+      "paramB": "B1"
+    },
+    {
+      "id": "G2",
+      "childId": "C2",
+      "name": "손자2",
+      "paramA": "A1",
+      "paramB": "B1"
+    },
+    {
+      "id": "G3",
+      "childId": "C3",
+      "name": "손자3",
+      "paramA": "A2",
+      "paramB": "B2"
+    }
+  ],
+
+  "gridData": [
+    {
+      "id": 1,
+      "parent": "P1",
+      "child": "C1",
+      "grandChild": "G1",
+      "useYn": "Y",
+      "value": 123
+    },
+    {
+      "id": 2,
+      "parent": "P1",
+      "child": "C2",
+      "grandChild": "G2",
+      "useYn": "N",
+      "value": 777
+    },
+    {
+      "id": 3,
+      "parent": "P2",
+      "child": "C3",
+      "grandChild": "G3",
+      "useYn": "Y",
+      "value": 555
+    }
   ]
 }
