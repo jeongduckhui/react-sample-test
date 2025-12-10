@@ -11,6 +11,7 @@ import AllReadonlyDisabledToggle from './components/allreadonlydisabledtoggle/Al
 import PopupTest from './components/popuptransfer/PopupTest.jsx';
 import SelectSearchPage from './components/selectsearch/SelectSearchPage.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import SubTotalAgGrid from './subtotal/SubTotalAgGrid.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'popuptransfer',
         element: <PopupTest />,
+      },
+      {
+        path: 'subtotal',
+        element: <SubTotalAgGrid />,
       },
     ],
   },

@@ -30,6 +30,12 @@ function Header() {
       icon: <FaInfoCircle />,
       to: '/popuptransfer',
     },
+    {
+      id: 'subtotal',
+      label: 'Sub Total Ag-grid',
+      icon: <FaInfoCircle />,
+      to: '/subtotal',
+    },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

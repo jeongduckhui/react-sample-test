@@ -1,0 +1,41 @@
+/* -------------------------
+   🔥 Subtotal Colors (컬럼별)
+--------------------------*/
+.subtotal-a {
+  background-color: #ffefb0 !important; /* 노랑 */
+  font-weight: bold;
+}
+
+.subtotal-b {
+  background-color: #d9f0ff !important; /* 하늘 */
+  font-weight: bold;
+}
+
+.subtotal-c {
+  background-color: #f0d8ff !important; /* 보라 */
+  font-weight: bold;
+}
+
+.subtotal-d {
+  background-color: #ffd6d6 !important; /* 분홍 */
+  font-weight: bold;
+}
+
+/* -------------------------
+   🔥 Group background colors
+--------------------------*/
+.group-a {
+  background-color: #fff6c4 !important; /* 연노랑 */
+}
+
+.group-b {
+  background-color: #e6f4ff !important; /* 연하늘 */
+}
+
+.group-c {
+  background-color: #f5e6ff !important; /* 연보라 */
+}
+
+.group-d {
+  background-color: #ffe8e8 !important; /* 연핑크 */
+}
